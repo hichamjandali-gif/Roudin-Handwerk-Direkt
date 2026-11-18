@@ -78,7 +78,7 @@
   function workDateOf(ad) {
     const match = String(ad && ad.description || "").match(/\[\[ROUDIN_WORK_DATE:(\d{4}-\d{2}-\d{2})\]\]/);
     if (match) return match[1];
-    return ad && ad.created_at ? String(ad.created_at).slice(0, 10) : "";
+    return "";
   }
   function storedDescription(text, date) {
     return cleanDescription(text) + "\n\n[[ROUDIN_WORK_DATE:" + date + "]]";
@@ -664,7 +664,7 @@
     $("#city").value = ad.city || "";
     $("#postal").value = ad.postal || "";
     $("#price").value = priceLabel(ad);
-    $("#workDate").value = workDateOf(ad);
+    $("#workDate").value = workDateOf(ad) || new Date().toISOString().slice(0, 10);
     const heading = $("#formPage h2");
     if (heading) heading.textContent = tr("تعديل الإعلان", "Anzeige bearbeiten");
     $("#saveAdBtn").textContent = tr("حفظ التعديلات", "Änderungen speichern");
